@@ -1,54 +1,38 @@
-# Google Sheet to GitLab Issue Agentic Skill
+# GitLab Business Intelligence: Centralizing Enterprise Logic
+**Summary:** Migrating Tableau custom SQL into version-controlled dbt model via an agentic-AI workflow with customer Claude Skills.
+## **Overview**
+Hundreds of custom SQL queries live on Tableau, each in their respective workbook. The problem is these queries cannot be tracked and monitored, making any upstream source changes silently break downstream queries. Ultimately, creating either outdated or inaccurate dashboards and reports both at department and company levels. Therefore, our goal in the first phase is to dbt-tized high value customer SQL to dbt models which can be tracked monitored and reconfigured whenever needed.
+## **Objectives**
+- **Identify** and **prioritize** the highest-value custom SQL for migration
+- **Design** a repeatable custom SQL to dbt conversion pipeline
+- **Repoint** Tableau workbooks to certified dbt source
+## **Data and Tools**
+Hundreds of custom SQL queries embedded across Tableau workbooks, some with multiple queries per workbook, supporting critical reports and dashboards used across departments
+Tools:
+- Claude Skills
+- OpenCode
+- Excel
+- Tableau
+- GitLab
+- SQL
+- dbt
+## **Methodology**
+- Evaluated and scored custom SQL queries using weighted model
+- Created a non-duplicated GitLab issue per each eligible custom SQL query
+- Triggered two agents to convert each custom SQL query in each GitLab issue to dbt code model and generate a merge request to be reviewed and approved by human (keeping human in the loop for final approval)
+## **Key Insights**
+- Our workflow was adopted by the data team and serves as a single, reusable pipeline that many developers can build on at once.
+- By moving custom SQL queries to dbt models, duplicates issue is eliminated
+- Migration effort dropped by 80%
+- Created a centralized source of truth that everyone can reference from and trace back
+## **Business Value**
+- **Reliability:** Upstream changes no longer silently break dashboards and reports because each SQL query now lives in dbt model which can tracked, monitored instead of hidden inside each workbook
+- **A single source of truth:** teams across departments reference the same certified models, so metrics stay consistent and accurate
+- **Faster, scalable migration:** a reusable pipeline allows the data team to covert queries in parallel, reducing migration effort by 80%
+- **Safe use of AI:** agents do the repetitive conversion work while human review and approve final change in each merge request.
+## **Team**
+**Faculty Advisor:** Mohannad Elhamod
 
-Below is the verbal documentation on how to create an agentic skill that convert each row in Google Sheet into a GitLab issue.
-
-## Name and Description
-- Name: name of the skill. In this case, it's gsheet-sql-issue-creator.
-- Description: describe the purpose of the skill being created.
-
-### Step 1: Read Google Sheet
-The Google Drive connector is used to locate and read the tracking Goole Sheet. It focus on the columns needed to make decision in creating an issue per row.
-- custom_SQL_ID (unique identifier)
-- migration_candidate (boolean)
-- final_score (numeric score per each query)
-- query (text)
-- converted (boolean)
-- confirm (boolean)
-
-### Step 2: Query Ranking
-1. In the tracking Google Sheet, keep rows where the following conditions are met:
-    - migration_candidate = TRUE
-    - converted = FALSE
-    - confirm = TRUE
-2. Rank filtered rows by final_score
-3. Tie-break by sheet row order position unless specify by users.
-4. Rank in a descending order
-
-### Step 3: Deduplicate Existing Issues
-- Before creating an issue, check the target repository/project for issues that already exist
-- Identify existing custom SQL query using custom_SQL_ID
-- Skip any rows that has a matching custom_SQL_ID to prevent creating repeat issue
-
-### Step 4: Confirm with Human before Creating Issue
-- Never create issues without explicit user confirmation
-- Ask "Create N number of issues for these queries?"
-- Allow user to adjust the list before proceeding
-
-### Step 5: Create One Issue per Query
-- For each selected query, create an issue
-- Loop over the selected rows and issue one per query
-- Each issue must follow the pre-designed issue structure
-    - Query Metadata
-    - Query
-### Step 6: Report
-- Once issues are created, summarize to the user the following:
-    - custom_SQL_ID
-    - final_score
-    - any skipped duplicates
-    - link to each query
-
-### Failture Handling:
-High level explanation when encounter error during each session:
-- No eligible rows --> report nothing match the condition in step 2
-- A single issue creation fails --> continue with the rest and report which query fail and provide explanation of blockers
-- Network Block --> explain that the repository is not reachable and show exact error then recommend how user can run themselves.
+Chamnan Suon **|** 
+Mokhinur Talibzhanova **|** 
+Quency Ye
