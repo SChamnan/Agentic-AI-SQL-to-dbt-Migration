@@ -1,5 +1,8 @@
 # GitLab Business Intelligence: Centralizing Enterprise Logic
 **Summary:** Migrating Tableau custom SQL into version-controlled dbt model via an agentic-AI workflow with customer Claude Skills.
+<img width="3370" height="2383" alt="Final-Poster" src="https://github.com/user-attachments/assets/51d46db0-d51f-4e4e-8c33-7ad6691dca4b" />
+
+
 ## **Overview**
 Hundreds of custom SQL queries live on Tableau, each in their respective workbook. The problem is these queries cannot be tracked and monitored, making any upstream source changes silently break downstream queries. Ultimately, creating either outdated or inaccurate dashboards and reports both at department and company levels. Therefore, our goal in the first phase is to dbt-tized high value customer SQL to dbt models which can be tracked monitored and reconfigured whenever needed.
 ## **Objectives**
